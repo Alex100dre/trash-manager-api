@@ -5,6 +5,6 @@ WORKDIR /api
 COPY package.json /api/package.json
 COPY yarn.lock /api/yarn.lock
 
-RUN npm install
+RUN yarn install
 
-CMD ["npm", "run", "start:dev"]
+CMD ["yarn", "run", "start:dev"]
