@@ -1,5 +1,7 @@
 import { Router, Request, Response } from 'express';
 import pg from "pg";
+import {Trash} from "../types/trash.type";
+import {TrashDto} from "../dto/trash.dto";
 
 const { Pool } = pg;
 
@@ -36,7 +38,11 @@ const getTrashes = (req: Request, response: Response) => {
         if(error) {
             throw error
         }
-        response.status(200).json(results.rows)
+        response.status(200).json(results.rows.map((row) => new TrashDto({
+            id: row.id,
+            removalDays: row.removal_days,
+            lastRemoval: row.last_removal
+        })))
     })
 }
 
